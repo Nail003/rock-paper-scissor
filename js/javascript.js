@@ -1,4 +1,7 @@
-console.log(tellWinner("Rock", getComputerChoice()));
+let playerChoice = "Rock";
+let computerChoice = getComputerChoice();
+
+console.log(tellWinner(playerChoice, computerChoice));
 
 // Helper Functions
 
