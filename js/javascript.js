@@ -26,8 +26,8 @@ function game() {
     }
 
     // Display score at the end
-    console.log(`%cPlayer score is ${playerScore}`, "color: green");
-    console.log(`%cComputer score is ${computerScore}`, "color: orange");
+    console.log(`%cPlayer score is ${playerScore}`, "color: lightgreen");
+    console.log(`%cComputer score is ${computerScore}`, "color: red");
 }
 
 // Helper Functions
@@ -44,7 +44,7 @@ function tellWinner(playerChoice, computerChoice) {
     if (winCondition1 || winCondition2 || winCondition3) {
         return {
             result: "won",
-            message: `You won!! ${playerChoice} beats ${computerChoice}`,
+            message: `\x1B[32mYou won!! ${playerChoice} \x1B[97mbeats \x1B[31m${computerChoice}`,
         };
     }
 
@@ -52,14 +52,14 @@ function tellWinner(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
         return {
             result: "draw",
-            message: `Draw!! Both choses ${playerChoice}`,
+            message: `\x1B[35mDraw!! \x1B[97mBoth choses \x1B[35m${playerChoice}`,
         };
     }
 
     // Player losses
     return {
         result: "loss",
-        message: `You loss!! ${computerChoice} beats ${playerChoice}`,
+        message: `\x1B[31mYou loss!! \x1B[32m${playerChoice} \x1B[97mdoes not beat \x1B[31m${computerChoice}`,
     };
 }
 
