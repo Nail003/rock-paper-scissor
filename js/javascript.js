@@ -4,7 +4,7 @@ function game() {
     // Initial score and total rounds
     let playerScore = 0;
     let computerScore = 0;
-    let rounds = 3;
+    let rounds = 5;
 
     // Run game
     for (let i = 0; i < rounds; i++) {
@@ -28,6 +28,9 @@ function game() {
     // Display score at the end
     console.log(`%cPlayer score is ${playerScore}`, "color: lightgreen");
     console.log(`%cComputer score is ${computerScore}`, "color: red");
+    if (playerScore > computerScore)
+        console.log("\x1B[32mYou have won!! \x1B[35mCongratulations!!");
+    if (playerScore <= computerScore) console.log("\x1B[31mYou have lost!!");
 }
 
 // Helper Functions
