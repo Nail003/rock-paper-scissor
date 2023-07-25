@@ -9,7 +9,6 @@
 -   [CRO] - Content Rate Optimization
 -   [TST] - Add test suite for slider component
 -   [!!!] - Deprecated. Can only be used with `[FTR]`
--   [RFR] - Code refactoring
 
 ## Examples
 
