@@ -38,6 +38,12 @@ function game() {
 
 // Helper Functions
 function getResults(playerChoice, computerChoice) {
+    /**
+     * Computes whether the player won or loss the match or it was a draw
+     * Returns an object (key-value pair) of the form {result: "...", message: "..."}
+     * result has three values of "win", "draw" and "loss"
+     * message contains the appropriate message according to the current result
+     */
     playerChoice = playerChoice.toUpperCase();
 
     // Player win conditions
@@ -71,6 +77,9 @@ function getResults(playerChoice, computerChoice) {
 }
 
 function getComputerChoice() {
+    /**
+     * This function returns a random string of either "ROCK", "PAPER" or "SCISSORS"
+     */
     const choices = ["ROCK", "PAPER", "SCISSORS"];
     return choices[randomNumber(0, 2)];
 }
