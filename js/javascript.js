@@ -1,42 +1,46 @@
+// Run game
 game();
 
 function game() {
-    // Initial score and total rounds
+    // Total score and total rounds
     let playerScore = 0;
     let computerScore = 0;
-    let rounds = 5;
+    const TOTAL_ROUNDS = 5;
 
-    // Run game
-    for (let i = 0; i < rounds; i++) {
-        // Get player and computer inputs
+    // Play multiple rounds till total rounds
+    for (let i = 0; i < TOTAL_ROUNDS; i++) {
+        // Get player and computer inputs for this round
         let playerChoice = prompt(
             "Type either 'rock', 'paper' or 'scissors' to make your choice"
         );
         let computerChoice = getComputerChoice();
 
-        // Check winner
-        let gameResult = tellWinner(playerChoice, computerChoice);
+        // Get the results of this match
+        let gameResult = getResults(playerChoice, computerChoice);
 
-        // Display win-loss message
+        // Display win-loss message of this match
         console.log(gameResult.message);
 
-        // Update score
+        // Update score that will be shown after the last round
         if (gameResult.result === "won") playerScore++;
         if (gameResult.result === "loss") computerScore++;
     }
 
-    // Display score at the end
+    // Display final score
     console.log(`%cPlayer score is ${playerScore}`, "color: lightgreen");
     console.log(`%cComputer score is ${computerScore}`, "color: red");
+
+    // Tell who won
     if (playerScore > computerScore)
         console.log("\x1B[32mYou have won!! \x1B[35mCongratulations!!");
     if (playerScore <= computerScore) console.log("\x1B[31mYou have lost!!");
 }
 
 // Helper Functions
-function tellWinner(playerChoice, computerChoice) {
+function getResults(playerChoice, computerChoice) {
     playerChoice = playerChoice.toUpperCase();
 
+    // Player win conditions
     let winCondition1 =
         playerChoice === "ROCK" && computerChoice === "SCISSORS";
     let winCondition2 =
@@ -51,7 +55,7 @@ function tellWinner(playerChoice, computerChoice) {
         };
     }
 
-    // For draw
+    // Draw
     if (playerChoice === computerChoice) {
         return {
             result: "draw",
@@ -72,5 +76,10 @@ function getComputerChoice() {
 }
 
 function randomNumber(min, max) {
+    /**
+     * Function that returns a random number between the specified range
+     * Both min and max are included
+     * For example randomNumber(1, 10) will return a number between 1 to 10
+     */
     return Math.floor(Math.random() * (max + 1 - min) + min);
 }
