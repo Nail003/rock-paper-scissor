@@ -2,9 +2,8 @@
 game();
 
 function game() {
-    // Total score and total rounds
-    let playerScore = 0;
-    let computerScore = 0;
+    let playerTotalScore = 0;
+    let computerTotalScore = 0;
     const TOTAL_ROUNDS = 5;
 
     // Play multiple rounds till total rounds
@@ -21,19 +20,20 @@ function game() {
         // Display win-loss message of this match
         console.log(gameResult.message);
 
-        // Update score that will be shown after the last round
-        if (gameResult.result === "won") playerScore++;
-        if (gameResult.result === "loss") computerScore++;
+        // Update total score for final score and win message
+        if (gameResult.result === "won") playerTotalScore++;
+        if (gameResult.result === "loss") computerTotalScore++;
     }
 
     // Display final score
-    console.log(`%cPlayer score is ${playerScore}`, "color: lightgreen");
-    console.log(`%cComputer score is ${computerScore}`, "color: red");
+    console.log(`%cPlayer score is ${playerTotalScore}`, "color: lightgreen");
+    console.log(`%cComputer score is ${computerTotalScore}`, "color: red");
 
     // Tell who won
-    if (playerScore > computerScore)
+    if (playerTotalScore > computerTotalScore)
         console.log("\x1B[32mYou have won!! \x1B[35mCongratulations!!");
-    if (playerScore <= computerScore) console.log("\x1B[31mYou have lost!!");
+    if (playerTotalScore <= computerTotalScore)
+        console.log("\x1B[31mYou have lost!!");
 }
 
 // Helper Functions
@@ -46,15 +46,15 @@ function getResults(playerChoice, computerChoice) {
      */
     playerChoice = playerChoice.toUpperCase();
 
-    // Player win conditions
-    let winCondition1 =
+    let playerWinCondition1 =
         playerChoice === "ROCK" && computerChoice === "SCISSORS";
-    let winCondition2 =
+    let playerWinCondition2 =
         playerChoice === "SCISSORS" && computerChoice === "PAPER";
-    let winCondition3 = playerChoice === "PAPER" && computerChoice === "ROCK";
+    let playerWinCondition3 =
+        playerChoice === "PAPER" && computerChoice === "ROCK";
 
     // Player wins
-    if (winCondition1 || winCondition2 || winCondition3) {
+    if (playerWinCondition1 || playerWinCondition2 || playerWinCondition3) {
         return {
             result: "won",
             message: `\x1B[32mYou won!! ${playerChoice} \x1B[97mbeats \x1B[31m${computerChoice}`,
