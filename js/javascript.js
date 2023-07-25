@@ -41,7 +41,7 @@ function getResults(playerChoice, computerChoice) {
     /**
      * Computes whether the player won or loss the match or it was a draw
      * Returns an object (key-value pair) of the form {result: "...", message: "..."}
-     * result has three values of "win", "draw" and "loss"
+     * result has three values of "win", "draw" and "loss" w.r.t player
      * message contains the appropriate message according to the current result
      */
     playerChoice = playerChoice.toUpperCase();
