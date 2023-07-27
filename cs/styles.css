@@ -1,0 +1,58 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #252525;
+    font-family: monospace;
+}
+
+h1 {
+    text-align: center;
+    font-size: 34px;
+    color: white;
+}
+
+#scoreContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 8px;
+    color: white;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+#playerScore {
+    color: orange;
+}
+
+#computerScore {
+    color: red;
+}
+
+#buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+button {
+    font-size: 32px;
+    background-color: orange;
+    border: 4px solid orange;
+    border-radius: 20px;
+    color: white;
+    padding: 32px;
+    width: 200px;
+}
+
+button:hover {
+    background-color: darkorange;
+    border-color: black;
+}
+
+.gameOver {
+    display: none;
+}

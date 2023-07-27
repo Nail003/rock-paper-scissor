@@ -1,42 +1,68 @@
-// Run game
-game();
+let playerScore = 0;
+let computerScore = 0;
 
-function game() {
-    let playerTotalScore = 0;
-    let computerTotalScore = 0;
-    const TOTAL_ROUNDS = 5;
+const buttons = document.querySelectorAll("button");
+const resultHeading = document.querySelector("#result");
+const playerScoreHeading = document.querySelector("#playerScore");
+const computerScoreHeading = document.querySelector("#computerScore");
 
-    // Play multiple rounds till total rounds
-    for (let i = 0; i < TOTAL_ROUNDS; i++) {
-        // Get player and computer inputs for this round
-        let playerChoice = prompt(
-            "Type either 'rock', 'paper' or 'scissors' to make your choice"
-        );
-        let computerChoice = getComputerChoice();
+buttons.forEach((btn) => btn.addEventListener("click", onButtonClick));
 
-        // Get the results of this match
-        let gameResult = getResults(playerChoice, computerChoice);
-
-        // Display win-loss message of this match
-        console.log(gameResult.message);
-
-        // Update total score for final score and win message
-        if (gameResult.result === "won") playerTotalScore++;
-        if (gameResult.result === "loss") computerTotalScore++;
+// Event Handlers
+function onButtonClick(e) {
+    if (e.target.textContent === "Reset") {
+        resetGame();
+        return;
     }
 
-    // Display final score
-    console.log(`%cPlayer score is ${playerTotalScore}`, "color: lightgreen");
-    console.log(`%cComputer score is ${computerTotalScore}`, "color: red");
+    const playerChoice = e.target.textContent;
+    const computerChoice = getComputerChoice();
 
-    // Tell who won
-    if (playerTotalScore > computerTotalScore)
-        console.log("\x1B[32mYou have won!! \x1B[35mCongratulations!!");
-    if (playerTotalScore <= computerTotalScore)
-        console.log("\x1B[31mYou have lost!!");
+    const result = getResults(playerChoice, computerChoice);
+
+    updateAnnouncement(result.message);
+    updateScore(result);
+    updateScoreBoard();
+
+    if (playerScore >= 5) {
+        updateAnnouncement("Congratulations!! You Won!!");
+        gameOver();
+        return;
+    }
+    if (computerScore >= 5) {
+        updateAnnouncement("You lost!! Game Over!!");
+        gameOver();
+        return;
+    }
 }
 
 // Helper Functions
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    updateScoreBoard();
+    updateAnnouncement("Best of 5 wins");
+    gameOver();
+}
+
+function gameOver() {
+    buttons.forEach((btn) => btn.classList.toggle("gameOver"));
+}
+
+function updateAnnouncement(message) {
+    resultHeading.textContent = message;
+}
+
+function updateScore(result) {
+    if (result.result === "won") playerScore++;
+    if (result.result === "loss") computerScore++;
+}
+
+function updateScoreBoard() {
+    playerScoreHeading.textContent = playerScore;
+    computerScoreHeading.textContent = computerScore;
+}
+
 function getResults(playerChoice, computerChoice) {
     /**
      * Computes whether the player won or loss the match or it was a draw
@@ -57,7 +83,7 @@ function getResults(playerChoice, computerChoice) {
     if (playerWinCondition1 || playerWinCondition2 || playerWinCondition3) {
         return {
             result: "won",
-            message: `\x1B[32mYou won!! ${playerChoice} \x1B[97mbeats \x1B[31m${computerChoice}`,
+            message: `You won!! ${playerChoice} beats ${computerChoice}`,
         };
     }
 
@@ -65,14 +91,14 @@ function getResults(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) {
         return {
             result: "draw",
-            message: `\x1B[35mDraw!! \x1B[97mBoth choses \x1B[35m${playerChoice}`,
+            message: `Draw!! Both choses ${playerChoice}`,
         };
     }
 
     // Player losses
     return {
         result: "loss",
-        message: `\x1B[31mYou loss!! \x1B[32m${playerChoice} \x1B[97mdoes not beat \x1B[31m${computerChoice}`,
+        message: `You loss!! ${playerChoice} does not beat ${computerChoice}`,
     };
 }
 
